@@ -4,6 +4,8 @@ import awswrangler as wr
 import boto3
 import pandas as pd
 
+pathoutput = "s3://dlocalsotpagamentos/tb_riscos"
+
 
 def extract_data(data):
     new_dict = {
@@ -19,7 +21,7 @@ def extract_data(data):
 def load_data(df, bucket, key):
     wr.s3.to_parquet(
         df=df,
-        path="s3://dlocalsotpagamentos/tb_riscos",
+        path=pathoutput,
         table="tb_riscos",
         database="db_local",
         compression="snappy",
@@ -39,11 +41,8 @@ def lambda_handler(event, context):
         data = json.load(json_object["Body"])
 
         df = extract_data(data)
-        load_data(df, bucket, key)
+        load_data(df, pathoutput)
 
         return "Success"
     except Exception as e:
         raise e
-
-
-print("Hello World")
