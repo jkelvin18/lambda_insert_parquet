@@ -31,14 +31,14 @@ def extract_data(data):
 
 def load_data(df, pathoutput):
     """
-    Extract the relevant data from the input JSON object
-    and convert it to a Pandas DataFrame
+    Save the extracted data to S3 as a Parquet file
 
     Parameters:
-    data (dict): The input JSON data
+    df (pd.DataFrame): The extracted data
+    pathoutput (str): The path to save the data in S3
 
     Returns:
-    df (pd.DataFrame): The extracted data in a Pandas DataFrame
+    None
     """
     wr.s3.to_parquet(
         df=df,
