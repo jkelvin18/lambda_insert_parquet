@@ -5,7 +5,7 @@ import boto3
 import pandas as pd
 
 # Define the path to save the output data in S3
-pathoutput = "s3://dlocalsotpagamentos/tb_riscos"
+pathoutput = "s3://dlocal-risk/tb_riscos"
 
 
 def extract_data(data):
